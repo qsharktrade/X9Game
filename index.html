@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Futuristic Loading</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      background: linear-gradient(135deg, #05050a 0%, #23242a 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .center-wrap {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    /* Blurred radial glows */
+    .glow1, .glow2, .glow3 {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.75;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glow1 {
+      width: 260px; height: 260px;
+      background: radial-gradient(circle at 60% 40%, #00ffe7 0%, transparent 80%);
+      left: 0; top: 0;
+    }
+    .glow2 {
+      width: 180px; height: 180px;
+      background: radial-gradient(circle at 40% 80%, #ff3cac 0%, transparent 80%);
+      left: 40px; top: 60px;
+      opacity: 0.4;
+    }
+    .glow3 {
+      width: 210px; height: 210px;
+      background: radial-gradient(circle at 80% 20%, #ffe600 0%, transparent 80%);
+      left: 30px; top: 15px;
+      opacity: 0.18;
+    }
+    /* Neon Animated Ring */
+    .neon-ring {
+      position: absolute;
+      left: 0; top: 0;
+      width: 270px; height: 270px;
+      z-index: 2;
+      pointer-events: none;
+      animation: ring-rotate 2.2s linear infinite;
+    }
+    @keyframes ring-rotate {
+      100% { transform: rotate(360deg);}
+    }
+    /* SVG ring glowing effect */
+    .neon-ring svg {
+      width: 100%; height: 100%;
+      display: block;
+    }
+    /* Logo */
+    .center-logo {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 110px; height: 110px;
+      z-index: 10;
+      border-radius: 50%;
+      box-shadow: 0 0 22px #00ffe7, 0 0 42px #ff3cac77;
+      background: rgba(10,20,24,0.75);
+      display: flex; align-items: center; justify-content: center;
+      overflow: visible;
+      transition: box-shadow 0.3s;
+      animation: logo-pulse 1.3s infinite alternate;
+    }
+    @keyframes logo-pulse {
+      0% { box-shadow: 0 0 22px #00ffe7, 0 0 42px #ff3cac55; }
+      100% { box-shadow: 0 0 44px #00ffe7, 0 0 72px #ff3caccc; }
+    }
+    .center-logo img {
+      width: 78px;
+      height: 78px;
+      display: block;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 24px #00ffe799);
+      z-index: 10;
+      background: transparent;
+      user-select: none;
+      pointer-events: none;
+    }
+    /* Subtle floating animation for the whole center group */
+    .center-wrap {
+      animation: floaty 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes floaty {
+      0% { transform: translateY(0);}
+      100% { transform: translateY(-12px);}
+    }
+  </style>
+</head>
+<body>
+  <div class="center-wrap">
+    <div class="glow1"></div>
+    <div class="glow2"></div>
+    <div class="glow3"></div>
+    <div class="neon-ring">
+      <svg viewBox="0 0 270 270">
+        <defs>
+          <radialGradient id="neon-grad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00ffe7" stop-opacity="1"/>
+            <stop offset="60%" stop-color="#ff3cac" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#23242a" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <circle cx="135" cy="135" r="110"
+          stroke="url(#neon-grad)"
+          stroke-width="9"
+          fill="none"
+          filter="url(#glow)"
+          stroke-dasharray="60 30 35 30 35 30 35 60"
+          stroke-dashoffset="0">
+          <animate attributeName="stroke-dashoffset" values="0;120" dur="2.2s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="center-logo">
+      <img src="https://i.imgur.com/08FdqAp.png" alt="Logo">
+    </div>
+  </div>
+</body>
+  </html>
