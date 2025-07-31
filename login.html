@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Casino Login & Register</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Orbitron font for futuristic effect -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* ---- RESET ---- */
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+      font-family: 'Orbitron', Arial, sans-serif;
+      background: #16131d;
+      overflow-x: hidden;
+    }
+    /* ---- BACKGROUND ANIMATION ---- */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      width: 80vw; height: 80vw;
+      left: 50%; top: 40%;
+      transform: translate(-50%, -50%) scale(1.1);
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(circle at 60% 30%, #00ffe755 0%, transparent 65%),
+                  radial-gradient(circle at 35% 80%, #ff3cac55 0%, transparent 70%);
+      opacity: 0.5;
+      filter: blur(30px);
+      animation: bgmove 14s infinite alternate;
+      transition: opacity .3s;
+    }
+    body::after {
+      background: radial-gradient(circle at 80% 10%, #ffe60055 0%, transparent 60%),
+                  radial-gradient(circle at 40% 80%, #00ffe755 0%, transparent 80%);
+      opacity: 0.23;
+      animation-delay: 6s;
+    }
+    @keyframes bgmove {
+      0% { transform: translate(-50%, -50%) scale(1.1);}
+      100% { transform: translate(-54%, -46%) scale(1.24);}
+    }
+
+    /* ---- CONTAINER ---- */
+    .auth-container {
+      position: relative;
+      z-index: 1;
+      max-width: 370px;
+      width: 95vw;
+      margin: 5vh auto 0 auto;
+      background: rgba(24,20,33,0.96);
+      border-radius: 2rem;
+      box-shadow: 0 0 42px #00ffe733, 0 0 92px #ff3cac33;
+      padding: 2.8rem 2rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow .3s;
+    }
+
+    /* ---- LOGO ---- */
+    .casino-logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 1.3rem auto;
+      box-shadow: 0 0 32px #00ffe788, 0 0 60px #ff3cac44;
+      background: rgba(0,0,0,0.32);
+      animation: glowlogo 2s infinite alternate;
+    }
+    @keyframes glowlogo {
+      0% { box-shadow: 0 0 32px #00ffe788, 0 0 60px #ff3cac44;}
+      100% { box-shadow: 0 0 52px #ff3cacbb, 0 0 90px #00ffe7bb;}
+    }
+
+    /* ---- TABS ---- */
+    .tab-switch {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 2.1rem;
+      gap: 0.6rem;
+      user-select: none;
+    }
+    .tab-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.14rem;
+      padding: 0.8rem 0;
+      border-radius: 1.1rem 1.1rem 0 0;
+      cursor: pointer;
+      letter-spacing: 1.5px;
+      transition: background .2s, color .2s, box-shadow .25s;
+      box-shadow: none;
+      outline: none;
+      border-bottom: 3px solid transparent;
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg,#00ffe7 10%, #ff3cac 90%);
+      color: #23213a;
+      font-weight: bold;
+      box-shadow: 0 0 18px #00ffe744, 0 0 24px #ff3cac33;
+      border-bottom: 3px solid #ffe600;
+      z-index: 3;
+    }
+
+    /* ---- FORM ---- */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      width: 100%;
+      z-index: 2;
+      animation: fadeIn .5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    .form-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-label {
+      font-size: 1.01rem;
+      letter-spacing: 1.1px;
+      color: #00ffe7;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+      text-shadow: 0 0 10px #00ffe799;
+    }
+    .form-input {
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.13rem;
+      padding: 0.8rem 1rem;
+      border-radius: 1rem;
+      border: 2px solid #23213a;
+      background: #181628;
+      color: #fff;
+      outline: none;
+      transition: border .18s, box-shadow .2s;
+      box-shadow: 0 0 14px #00ffe722;
+      letter-spacing: 1px;
+    }
+    .form-input:focus {
+      border: 2px solid #00ffe7;
+      box-shadow: 0 0 22px #00ffe7cc;
+    }
+    .form-input.error {
+      border: 2px solid #ff3c3c;
+      box-shadow: 0 0 14px #ff3c3c77;
+      animation: shake .32s;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0);}
+      20% { transform: translateX(-6px);}
+      40% { transform: translateX(5px);}
+      60% { transform: translateX(-4px);}
+      80% { transform: translateX(3px);}
+      100% { transform: translateX(0);}
+    }
+    .error-message {
+      color: #ff3c3c;
+      font-size: 0.98rem;
+      margin-top: 0.08rem;
+      min-height: 1.3em;
+      text-shadow: 0 0 8px #ff3c3c33, 0 0 14px #fff2;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---- SHOW/HIDE PASSWORD ---- */
+    .toggle-pw {
+      position: absolute;
+      right: 1.1rem;
+      top: 51%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #00ffe7;
+      font-size: 1.21rem;
+      cursor: pointer;
+      opacity: 0.85;
+      z-index: 4;
+      transition: color .18s;
+    }
+    .toggle-pw:active { color: #ff3cac;}
+
+    /* ---- BUTTONS ---- */
+    .auth-btn {
+      background: linear-gradient(90deg,#ff3cac,#00ffe7 80%);
+      color: #23213a;
+      font-family: 'Orbitron', Arial, sans-serif;
+      font-size: 1.13rem;
+      padding: 0.9rem 0;
+      border: none;
+      border-radius: 1.2rem;
+      box-shadow: 0 0 18px #ff3cac88, 0 0 24px #00ffe744;
+      font-weight: bold;
+      letter-spacing: 1.3px;
+      cursor: pointer;
+      margin-top: 0.3rem;
+      transition: background .22s, color .18s, box-shadow .22s, transform .13s;
+      outline: none;
+    }
+    .auth-btn:active { transform:scale(0.97);}
+    .auth-btn:disabled {
+      background: #444a; color: #bbb; box-shadow: none; cursor: not-allowed;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 550px) {
+      .auth-container { padding: 1.2rem 0.4rem 1.2rem 0.4rem; }
+      .casino-logo { width:55px;height:55px;}
+      .tab-btn { font-size:1rem; }
+    }
+    @media (max-width: 400px) {
+      .auth-container{max-width:99vw;}
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <img src="https://i.imgur.com/08FdqAp.png" alt="Casino Logo" class="casino-logo">
+
+    <!-- Tabs for switching -->
+    <div class="tab-switch">
+      <button class="tab-btn active" id="tab-login">Login</button>
+      <button class="tab-btn" id="tab-register">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" autocomplete="off">
+      <div class="form-group">
+        <label class="form-label" for="login-user">Gmail or Username</label>
+        <input class="form-input" id="login-user" name="login-user" type="text" autocomplete="username">
+        <div class="error-message" id="login-user-error"></div>
+      </div>
+      <div class="form-group" style="position:relative;">
+        <label class="form-label" for="login-password">Password</label>
+        <input class="form-input" id="login-password" name="login-password" type="password" autocomplete="current-password">
+        <button type="button" class="toggle-pw" tabindex="-1" onclick="togglePassword('login-password', this)">👁</button>
+        <div class="error-message" id="login-password-error"></div>
+      </div>
+      <button class="auth-btn" type="submit" id="login-btn">Login</button>
+    </form>
+
+    <!-- Registration Form -->
+    <form id="register-form" style="display:none;" autocomplete="off">
+      <div class="form-group">
+        <label class="form-label" for="reg-email">Gmail</label>
+        <input class="form-input" id="reg-email" name="reg-email" type="email" autocomplete="email">
+        <div class="error-message" id="reg-email-error"></div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="reg-username">Username</label>
+        <input class="form-input" id="reg-username" name="reg-username" type="text" autocomplete="username">
+        <div class="error-message" id="reg-username-error"></div>
+      </div>
+      <div class="form-group" style="position:relative;">
+        <label class="form-label" for="reg-password">Password</label>
+        <input class="form-input" id="reg-password" name="reg-password" type="password" autocomplete="new-password">
+        <button type="button" class="toggle-pw" tabindex="-1" onclick="togglePassword('reg-password', this)">👁</button>
+        <div class="error-message" id="reg-password-error"></div>
+      </div>
+      <button class="auth-btn" type="submit" id="register-btn">Register</button>
+    </form>
+  </div>
+
+  <script>
+    // ----- TAB SWITCHING -----
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    tabLogin.onclick = () => {
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+      loginForm.style.display = 'flex';
+      registerForm.style.display = 'none';
+      // Reset errors
+      clearAllErrors();
+    };
+    tabRegister.onclick = () => {
+      tabRegister.classList.add('active');
+      tabLogin.classList.remove('active');
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'flex';
+      clearAllErrors();
+    };
+
+    // ----- PASSWORD SHOW/HIDE -----
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "🔐";
+      } else {
+        input.type = "password";
+        btn.textContent = "👁";
+      }
+      input.focus();
+    }
+
+    // ----- VALIDATION -----
+    // Helper regex
+    function isGmail(email) {
+      return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+    }
+    function isValidEmail(email) {
+      // Accept only gmail here
+      return isGmail(email);
+    }
+    function isValidUsername(username) {
+      return /^[a-zA-Z0-9]{4,16}$/.test(username);
+    }
+    function isValidPassword(pw) {
+      return pw.length >= 8;
+    }
+
+    // ---- CLEAR ERRORS ----
+    function clearAllErrors() {
+      document.querySelectorAll('.form-input').forEach(i=>{
+        i.classList.remove('error');
+      });
+      document.querySelectorAll('.error-message').forEach(e=>{
+        e.textContent = '';
+      });
+    }
+
+    // ----- REGISTER FORM SUBMIT -----
+    registerForm.onsubmit = function(e) {
+      e.preventDefault();
+      clearAllErrors();
+      let valid = true;
+
+      const email = document.getElementById('reg-email').value.trim();
+      const username = document.getElementById('reg-username').value.trim();
+      const password = document.getElementById('reg-password').value;
+
+      // Email
+      if (!email) {
+        valid = false;
+        showError('reg-email', 'Required.');
+      } else if (!isValidEmail(email)) {
+        valid = false;
+        showError('reg-email', 'Must be a valid Gmail address.');
+      }
+      // Username
+      if (!username) {
+        valid = false;
+        showError('reg-username', 'Required.');
+      } else if (!isValidUsername(username)) {
+        valid = false;
+        showError('reg-username', '4-16 letters/numbers only.');
+      }
+      // Password
+      if (!password) {
+        valid = false;
+        showError('reg-password', 'Required.');
+      } else if (!isValidPassword(password)) {
+        valid = false;
+        showError('reg-password', 'Minimum 8 characters.');
+      }
+
+      if (valid) {
+        // Example: Show success, in real app submit to backend
+        alert('Registration successful!\n(This is a demo. No data is saved.)');
+        registerForm.reset();
+      }
+    };
+
+    // ----- LOGIN FORM SUBMIT -----
+    loginForm.onsubmit = function(e) {
+      e.preventDefault();
+      clearAllErrors();
+      let valid = true;
+
+      const user = document.getElementById('login-user').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      // User field: allow gmail or username
+      if (!user) {
+        valid = false;
+        showError('login-user', 'Required.');
+      } else if (!isGmail(user) && !isValidUsername(user)) {
+        valid = false;
+        showError('login-user', 'Enter Gmail or username.');
+      }
+      // Password
+      if (!password) {
+        valid = false;
+        showError('login-password', 'Required.');
+      } else if (!isValidPassword(password)) {
+        valid = false;
+        showError('login-password', 'Minimum 8 characters.');
+      }
+
+      if (valid) {
+        alert('Login successful!\n(This is a demo. No data is saved.)');
+        loginForm.reset();
+      }
+    };
+
+    // ----- Show error helper -----
+    function showError(fieldId, msg) {
+      const input = document.getElementById(fieldId);
+      const errDiv = document.getElementById(fieldId + '-error');
+      input.classList.add('error');
+      errDiv.textContent = msg;
+    }
+  </script>
+</body>
+  </html>
