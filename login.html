@@ -44,8 +44,6 @@
       0% { transform: translate(-50%, -50%) scale(1.1);}
       100% { transform: translate(-54%, -46%) scale(1.24);}
     }
-
-    /* ---- CONTAINER ---- */
     .auth-container {
       position: relative;
       z-index: 1;
@@ -61,8 +59,6 @@
       align-items: center;
       transition: box-shadow .3s;
     }
-
-    /* ---- LOGO ---- */
     .casino-logo {
       width: 88px;
       height: 88px;
@@ -78,8 +74,6 @@
       0% { box-shadow: 0 0 32px #00ffe788, 0 0 60px #ff3cac44;}
       100% { box-shadow: 0 0 52px #ff3cacbb, 0 0 90px #00ffe7bb;}
     }
-
-    /* ---- TABS ---- */
     .tab-switch {
       display: flex;
       width: 100%;
@@ -112,8 +106,6 @@
       border-bottom: 3px solid #ffe600;
       z-index: 3;
     }
-
-    /* ---- FORM ---- */
     form {
       display: flex;
       flex-direction: column;
@@ -126,7 +118,6 @@
       from { opacity: 0; transform: translateY(20px);}
       to { opacity: 1; transform: translateY(0);}
     }
-
     .form-group {
       position: relative;
       display: flex;
@@ -179,8 +170,6 @@
       text-shadow: 0 0 8px #ff3c3c33, 0 0 14px #fff2;
       letter-spacing: 0.5px;
     }
-
-    /* ---- SHOW/HIDE PASSWORD ---- */
     .toggle-pw {
       position: absolute;
       right: 1.1rem;
@@ -196,8 +185,6 @@
       transition: color .18s;
     }
     .toggle-pw:active { color: #ff3cac;}
-
-    /* ---- BUTTONS ---- */
     .auth-btn {
       background: linear-gradient(90deg,#ff3cac,#00ffe7 80%);
       color: #23213a;
@@ -218,8 +205,6 @@
     .auth-btn:disabled {
       background: #444a; color: #bbb; box-shadow: none; cursor: not-allowed;
     }
-
-    /* ---- RESPONSIVE ---- */
     @media (max-width: 550px) {
       .auth-container { padding: 1.2rem 0.4rem 1.2rem 0.4rem; }
       .casino-logo { width:55px;height:55px;}
@@ -289,7 +274,6 @@
       tabRegister.classList.remove('active');
       loginForm.style.display = 'flex';
       registerForm.style.display = 'none';
-      // Reset errors
       clearAllErrors();
     };
     tabRegister.onclick = () => {
@@ -314,12 +298,10 @@
     }
 
     // ----- VALIDATION -----
-    // Helper regex
     function isGmail(email) {
       return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
     }
     function isValidEmail(email) {
-      // Accept only gmail here
       return isGmail(email);
     }
     function isValidUsername(username) {
@@ -328,8 +310,6 @@
     function isValidPassword(pw) {
       return pw.length >= 8;
     }
-
-    // ---- CLEAR ERRORS ----
     function clearAllErrors() {
       document.querySelectorAll('.form-input').forEach(i=>{
         i.classList.remove('error');
@@ -344,12 +324,9 @@
       e.preventDefault();
       clearAllErrors();
       let valid = true;
-
       const email = document.getElementById('reg-email').value.trim();
       const username = document.getElementById('reg-username').value.trim();
       const password = document.getElementById('reg-password').value;
-
-      // Email
       if (!email) {
         valid = false;
         showError('reg-email', 'Required.');
@@ -357,7 +334,6 @@
         valid = false;
         showError('reg-email', 'Must be a valid Gmail address.');
       }
-      // Username
       if (!username) {
         valid = false;
         showError('reg-username', 'Required.');
@@ -365,7 +341,6 @@
         valid = false;
         showError('reg-username', '4-16 letters/numbers only.');
       }
-      // Password
       if (!password) {
         valid = false;
         showError('reg-password', 'Required.');
@@ -373,9 +348,7 @@
         valid = false;
         showError('reg-password', 'Minimum 8 characters.');
       }
-
       if (valid) {
-        // Example: Show success, in real app submit to backend
         alert('Registration successful!\n(This is a demo. No data is saved.)');
         registerForm.reset();
       }
@@ -386,11 +359,8 @@
       e.preventDefault();
       clearAllErrors();
       let valid = true;
-
       const user = document.getElementById('login-user').value.trim();
       const password = document.getElementById('login-password').value;
-
-      // User field: allow gmail or username
       if (!user) {
         valid = false;
         showError('login-user', 'Required.');
@@ -398,7 +368,6 @@
         valid = false;
         showError('login-user', 'Enter Gmail or username.');
       }
-      // Password
       if (!password) {
         valid = false;
         showError('login-password', 'Required.');
@@ -406,14 +375,11 @@
         valid = false;
         showError('login-password', 'Minimum 8 characters.');
       }
-
       if (valid) {
-        alert('Login successful!\n(This is a demo. No data is saved.)');
-        loginForm.reset();
+        window.location.href = 'home.html';
       }
     };
 
-    // ----- Show error helper -----
     function showError(fieldId, msg) {
       const input = document.getElementById(fieldId);
       const errDiv = document.getElementById(fieldId + '-error');
@@ -422,4 +388,4 @@
     }
   </script>
 </body>
-  </html>
+</html>
