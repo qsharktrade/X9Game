@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>X9 Game | Futuristic Casino 2099</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Orbitron font for futuristic look -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
   <style>
@@ -76,8 +76,8 @@
       animation: logo-glow 2.2s infinite alternate;
     }
     @keyframes logo-glow {
-      0% { box-shadow: 0 0 32px var(--primary), 0 0 60px var(--secondary);}
-      100% { box-shadow: 0 0 52px var(--secondary), 0 0 90px var(--primary);}
+      0% { box-shadow: 0 0 32px var(--primary), 0 0 60px var(--secondary); }
+      100% { box-shadow: 0 0 52px var(--secondary), 0 0 90px var(--primary); }
     }
     .site-title {
       font-size: 2.0rem;
@@ -108,8 +108,8 @@
       animation: bal-pulse 2s infinite alternate;
     }
     @keyframes bal-pulse {
-      0% { box-shadow: 0 0 10px var(--primary);}
-      100% { box-shadow: 0 0 32px var(--primary);}
+      0% { box-shadow: 0 0 10px var(--primary); }
+      100% { box-shadow: 0 0 32px var(--primary); }
     }
     .balance-icon {
       font-size: 1.15em;
@@ -122,7 +122,7 @@
     .slider-container {
       width: 98vw;
       max-width: 420px;
-      margin: 2vw auto 2vw auto;
+      margin: 2vw auto;
       position: relative;
       overflow: hidden;
       border-radius: 1.6rem;
@@ -180,7 +180,7 @@
     }
     .games-grid {
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
       margin: 0 auto;
       justify-items: center;
@@ -188,7 +188,6 @@
     .game-card {
       width: 100%;
       max-width: 160px;
-      min-width: 0;
       background: var(--glass);
       border-radius: 1.1rem;
       box-shadow: 0 0 15px var(--primary), 0 0 22px var(--secondary);
@@ -231,8 +230,8 @@
       text-shadow: 0 0 8px var(--primary), 0 0 14px var(--secondary);
       padding: 0.5em 0 0.7em 0;
       width: 100%;
+      background: rgba(0, 0, 0, 0.06);
       font-family: 'Orbitron', Arial, sans-serif;
-      background: rgba(0,0,0,0.06);
       font-weight: 700;
       border-radius: 0 0 1.1rem 1.1rem;
       margin: 0;
@@ -242,8 +241,10 @@
     /* FOOTER BUTTONS */
     .footer {
       position: fixed;
-      left: 0; bottom: 0; width: 100vw;
-      padding: 0.7rem 0.4rem 0.5rem 0.4rem;
+      left: 0; 
+      bottom: 0; 
+      width: 100vw;
+      padding: 0.7rem 0.4rem;
       background: linear-gradient(0deg, rgba(24,28,44,0.95) 65%, transparent 100%);
       display: flex;
       justify-content: center;
@@ -262,8 +263,7 @@
       font-family: 'Orbitron', Arial, sans-serif;
       font-weight: 900;
       color: var(--bg-dark);
-      background:
-        linear-gradient(90deg, var(--primary), var(--secondary), var(--yellow));
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--yellow));
       border: none;
       margin: 0 0.4em;
       box-shadow: 0 0 20px var(--primary), 0 0 20px var(--secondary), 0 0 8px var(--yellow);
@@ -284,8 +284,8 @@
       filter: saturate(1.1) brightness(0.93);
     }
     @keyframes btn-glow {
-      0% { box-shadow: 0 0 20px var(--primary), 0 0 20px var(--secondary);}
-      100% { box-shadow: 0 0 28px var(--yellow), 0 0 28px var(--primary);}
+      0% { box-shadow: 0 0 20px var(--primary), 0 0 20px var(--secondary); }
+      100% { box-shadow: 0 0 28px var(--yellow), 0 0 28px var(--primary); }
     }
 
     /* MOBILE STYLES */
@@ -297,25 +297,52 @@
         padding: 2vw 0 0.5vw 0;
         gap: 5px;
       }
-      .logo { margin-right: 0; margin-bottom: 4px; }
-      .site-title { margin-left: 0; text-align: center; font-size: 1.3rem; }
-      .balance-box { margin-left: 0; font-size: 0.95rem; }
-      .slider-container { max-width: 99vw; }
-      .slider-img { height: 90px; }
-      .games-section { padding: 0 1vw; }
-      .games-grid { grid-template-columns: repeat(2,1fr); gap: 0.8rem;}
-      .game-card { max-width: 99vw; }
-      .game-img { height: 45px; }
-      .game-title { font-size: 0.88rem; padding-bottom: 0.5em;}
-      .footer { flex-direction: column; gap: 0.7em; padding-bottom: 0.2em;}
-      .footer-btn { min-width: 0; font-size: 0.97rem; margin:0.3em 0; }
-    }
-    @media (max-width: 430px) {
-      .auth-container{max-width:99vw;}
-      .slider-img { height: 70px; }
-      .games-grid { grid-template-columns: 1fr;}
-      .game-card { margin-bottom: 0.5rem;}
-      .footer { padding: 0.4rem 0.1rem 0.1rem 0.1rem;}
+      .logo { 
+        margin-right: 0; 
+        margin-bottom: 4px; 
+      }
+      .site-title { 
+        margin-left: 0; 
+        text-align: center; 
+        font-size: 1.3rem; 
+      }
+      .balance-box { 
+        margin-left: 0; 
+        font-size: 0.95rem; 
+      }
+      .slider-container { 
+        max-width: 99vw; 
+      }
+      .slider-img { 
+        height: 90px; 
+      }
+      .games-section { 
+        padding: 0 1vw; 
+      }
+      .games-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 0.8rem;
+      }
+      .game-card { 
+        max-width: 99vw; 
+      }
+      .game-img { 
+        height: 45px; 
+      }
+      .game-title { 
+        font-size: 0.88rem; 
+        padding-bottom: 0.5em;
+      }
+      /* ফুটারে Deposit ও Withdraw বাটনগুলো মোবাইলে এক লাইনে দেখানোর জন্য */
+      .footer {
+        flex-direction: row;
+        padding: 0.7rem 0.4rem;
+      }
+      .footer-btn { 
+        min-width: 90px; 
+        font-size: 0.97rem; 
+        margin: 0.3em 0;
+      }
     }
   </style>
 </head>
@@ -323,7 +350,7 @@
   <!-- Header -->
   <div class="header">
     <div class="logo">
-      <img src="https://i.imgur.com/08FdqAp.png" alt="X9 Game Casino Logo" style="height:42px;width:42px; border-radius:50%;">
+      <img src="https://i.imgur.com/08FdqAp.png" alt="X9 Game Casino Logo" style="height:42px; width:42px; border-radius:50%;">
     </div>
     <span class="site-title">X9 GAME</span>
     <div class="balance-box" id="balanceBox">
@@ -372,17 +399,16 @@
     </div>
   </div>
 
-  <!-- Footer Buttons -->
+  <!-- Footer Buttons (Profile option removed) -->
   <div class="footer">
     <a href="deposit.html" class="footer-btn">Deposit</a>
     <a href="withdraw.html" class="footer-btn">Withdraw</a>
-    <a href="profile.html" class="footer-btn">Profile</a>
   </div>
 
   <script>
     // ----- Fake balance -----
     let balance = 6900.00;
-    document.getElementById('userBalance').textContent = balance.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    document.getElementById('userBalance').textContent = balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     // ----- Image Slider -----
     const sliderImages = document.querySelectorAll('.slider-img');
@@ -392,7 +418,7 @@
 
     function createSliderDots() {
       sliderDots.innerHTML = '';
-      for(let i=0; i<sliderImages.length; i++) {
+      for(let i = 0; i < sliderImages.length; i++) {
         const dot = document.createElement('span');
         dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
         dot.onclick = () => { goToSlide(i); };
@@ -403,7 +429,7 @@
     function goToSlide(n) {
       currentSlide = n;
       sliderTrack.style.transform = `translateX(-${n * 100}%)`;
-      Array.from(sliderDots.children).forEach((d,i)=>d.classList.toggle('active', i===n));
+      Array.from(sliderDots.children).forEach((d, i) => d.classList.toggle('active', i === n));
     }
 
     function nextSlide() {
@@ -414,8 +440,8 @@
     createSliderDots();
     let sliderInterval = setInterval(nextSlide, 3500);
 
-    sliderTrack.addEventListener('mouseenter', ()=>clearInterval(sliderInterval));
-    sliderTrack.addEventListener('mouseleave', ()=>sliderInterval = setInterval(nextSlide, 3500));
+    sliderTrack.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+    sliderTrack.addEventListener('mouseleave', () => sliderInterval = setInterval(nextSlide, 3500));
 
     // Touch swipe for mobile
     let startX = null;
@@ -426,14 +452,14 @@
       if (startX === null) return;
       let dx = e.touches[0].clientX - startX;
       if (Math.abs(dx) > 50) {
-        if (dx > 0) goToSlide((currentSlide-1+sliderImages.length)%sliderImages.length);
-        else goToSlide((currentSlide+1)%sliderImages.length);
+        if (dx > 0) goToSlide((currentSlide - 1 + sliderImages.length) % sliderImages.length);
+        else goToSlide((currentSlide + 1) % sliderImages.length);
         startX = null;
       }
     });
-    sliderTrack.addEventListener('touchend', ()=>{ startX = null; });
+    sliderTrack.addEventListener('touchend', () => { startX = null; });
 
-    window.addEventListener('resize', ()=>goToSlide(currentSlide));
+    window.addEventListener('resize', () => goToSlide(currentSlide));
   </script>
 </body>
 </html>
