@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Withdraw - X9 Casino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: black;
+      color: #00ff88;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: auto;
+      background: #031d17;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #00ff88;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #00ff88;
+      margin-bottom: 10px;
+    }
+
+    .notice {
+      background: #011a11;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-left: 4px solid #00ff88;
+      color: #ffffffcc;
+      font-size: 15px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #000;
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00ff88;
+      color: black;
+    }
+
+    .pending-message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Withdraw Request</h2>
+
+    <div class="notice">
+      মিনিমাম উইথড্র অ্যামাউন্ট ১০০০ টাকা। নিচে আপনার ইউজারনেম, নাম্বার ও পেমেন্ট পদ্ধতি দিয়ে সাবমিট করুন ।
+    </div>
+
+    <form id="withdrawForm">
+      <input type="text" name="username" placeholder="Your Username" required>
+      <input type="number" id="amount" name="amount" placeholder="Withdraw Amount (৳)" required>
+      <input type="text" name="number" placeholder="Your bKash/Nagad/Rocket Number" maxlength="11" required>
+      
+      <select name="method" required>
+        <option value="">-- Select Payment Method --</option>
+        <option value="bKash">bKash</option>
+        <option value="Nagad">Nagad</option>
+        <option value="Rocket">Rocket</option>
+      </select>
+
+      <button type="submit">Submit Withdraw</button>
+    </form>
+
+    <div class="pending-message" id="pendingMessage">✔️ Withdraw Request Sent... Redirecting</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('withdrawForm');
+    const amountInput = document.getElementById('amount');
+    const pendingMessage = document.getElementById('pendingMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const amount = parseInt(amountInput.value);
+
+      if (amount < 1000) {
+        alert("মিনিমাম উইথড্র অ্যামাউন্ট ১০০০ টাকা");
+        return;
+      }
+
+      pendingMessage.style.display = 'block';
+
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
