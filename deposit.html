@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual Deposit - X9 Casino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: black;
+      color: #00ff88;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: auto;
+      background: #031d17;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #00ff88;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #00ff88;
+      margin-bottom: 10px;
+    }
+
+    .number-section {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #00ff88;
+      padding-bottom: 15px;
+    }
+
+    .number-section p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .notice {
+      background: #011a11;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-left: 4px solid #00ff88;
+      color: #ffffffcc;
+      font-size: 15px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #000;
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00ff88;
+      color: black;
+    }
+
+    .pending-message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Manual Deposit</h2>
+    
+    <div class="number-section">
+      <p><strong>বিকাশ:</strong> 01933111154</p>
+      <p><strong>নগদ:</strong> 01933111154</p>
+      <p><strong>রকেট:</strong> 019800304675</p>
+      <p><strong>উপায়:</strong> 01980030467</p>
+    </div>
+
+    <div class="notice">
+      সেন্ট মানি অথবা ক্যাশ ইন করে <strong>লাস্ট নাম্বার</strong> দিয়ে সাবমিট করুন।
+    </div>
+
+    <form id="depositForm">
+      <input type="text" name="username" placeholder="Your Username" required>
+      <input type="number" name="amount" placeholder="Amount (৳)" required>
+      <input type="text" name="last4digit" placeholder="Last 4 Digits of Number" maxlength="4" required>
+      <button type="submit">Submit Deposit</button>
+    </form>
+
+    <div class="pending-message" id="pendingMessage">✔️ Submit Pending... Redirecting</div>
+  </div>
+
+  <script>
+    const form = document.getElementById('depositForm');
+    const pendingMessage = document.getElementById('pendingMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Show pending message
+      pendingMessage.style.display = 'block';
+
+      // Optionally: Send to server here with fetch/ajax (if needed)
+
+      // Redirect after 3 seconds
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
